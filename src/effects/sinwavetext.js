@@ -17,7 +17,7 @@ export default class SinWaveText {
         this.speed = 2;
         this.fps = 10;
         this.originalText = 'DEWASTED.NET';
-        this.amplitude = 30;
+        this.amplitude = 20;
         this.degree = 45;
         this.paused = false;
         this.textY = 60;
@@ -52,7 +52,7 @@ export default class SinWaveText {
         if (timestamp - this.lastDrawn < this.fps) {
             return;
         }
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
         this.lastDrawn = timestamp;
         // Redraw
         this.text.forEach(char => {
@@ -62,10 +62,15 @@ export default class SinWaveText {
             }
             const y = Math.sin(char.position / this.degree) * this.amplitude;
 
-            const gradient = this.ctx.createLinearGradient(0, 0, 300, 300);
-            gradient.addColorStop(0, '#D3D3D3');
-            gradient.addColorStop(1, '#2D3436');
-            this.ctx.font = '25px Saira Stencil One';
+            const gradient = this.ctx.createLinearGradient(
+                this.canvas.width / 2,
+                0,
+                this.canvas.width / 2,
+                this.canvas.height
+            );
+            gradient.addColorStop(0, '#57606F');
+            gradient.addColorStop(1, '#D3D3D3');
+            this.ctx.font = '25px Black Ops One';
             // Shadow
             this.ctx.fillStyle = '#121414';
             this.ctx.fillText(
