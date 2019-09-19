@@ -88,7 +88,7 @@ export default class PlasmaEffect {
         var buffer = new Array(height);
 
         for (var y = 0; y < height; y++) {
-            buffer[y] = new Array(width);
+            buffer[y] = new Array(Math.ceil(width));
 
             for (var x = 0; x < width; x++) {
                 var value = Math.sin(x / 11.0);

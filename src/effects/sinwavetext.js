@@ -68,8 +68,8 @@ export default class SinWaveText {
                 this.canvas.width / 2,
                 this.canvas.height
             );
-            gradient.addColorStop(0, '#57606F');
-            gradient.addColorStop(1, '#D3D3D3');
+            gradient.addColorStop(0, '#F5F7F6');
+            gradient.addColorStop(1, '#5CA0F2');
             this.ctx.font = '25px Black Ops One';
             // Shadow
             this.ctx.fillStyle = '#121414';

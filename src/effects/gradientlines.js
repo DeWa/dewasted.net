@@ -54,6 +54,7 @@ export default class GradientLines {
                 light += 90 / 5;
             }
             light = 30;
+            linePos += 1;
         }
     }
 
@@ -123,7 +124,6 @@ export default class GradientLines {
                     Math.round(line.color) === this.colors[this.currentColor] &&
                     this.isColorChangeOn
                 ) {
-                    console.log('Oihiohj');
                     this.isColorChangeOn = false;
                 }
                 this.ctx.beginPath();
