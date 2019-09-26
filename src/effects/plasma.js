@@ -20,6 +20,7 @@ export default class PlasmaEffect {
         this.switch = 0;
         this.size = 0.2;
 
+        this.isSmall = window.innerWidth < 1400;
         this.plasma = this.createPlasma();
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -61,20 +62,19 @@ export default class PlasmaEffect {
 
     drawPlasma() {
         const { width, height, plasma, context } = this;
-
-        const img = this.context.getImageData(0, 0, width, height);
-
-        for (var y = 0; y < height; y++) {
-            for (var x = 0; x < width; x++) {
+        const img = this.context.getImageData(
+            0,
+            0,
+            Math.ceil(width),
+            Math.ceil(height)
+        );
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
                 this.switch = this.switch + 0.1;
-
-                // if (this.switch > 0.5) {
-                //     this.switch = 0;
-                // }
 
                 var hue = this.hueShift + (plasma[y][x] % 1) / this.size;
                 var rgb = this.HSVtoRGB(hue, 1, 1);
-                var pos = (y * width + x) * 4;
+                var pos = (y * Math.ceil(width) + x) * 4;
                 img.data[pos] = rgb.r / 19;
                 img.data[pos + 1] = rgb.g / 9;
                 img.data[pos + 2] = rgb.b / 1;
@@ -85,7 +85,7 @@ export default class PlasmaEffect {
 
     createPlasma() {
         const { width, height } = this;
-        var buffer = new Array(height);
+        var buffer = new Array(Math.ceil(height));
 
         for (var y = 0; y < height; y++) {
             buffer[y] = new Array(Math.ceil(width));
