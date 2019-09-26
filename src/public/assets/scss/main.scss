@@ -1,4 +1,19 @@
 @import url('https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% 00%;
+    }
+}
 
 html,
 body {
@@ -8,11 +23,14 @@ body {
     height: 100%;
     overflow: auto;
 }
+
 body {
     background-color: black;
+    font-family: 'VT323', monospace;
 }
 
 #plasma-canvas {
+    z-index: 3;
     position: absolute;
     top: 0;
     left: 0;
@@ -21,9 +39,97 @@ body {
 }
 
 #sinwave-canvas {
+    z-index: 3;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 400px;
+}
+
+#balls-canvas {
+    z-index: 3;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+}
+
+#balls-canvas2 {
+    z-index: 3;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+}
+
+#ui {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#menu {
+    display: flex;
+    margin-bottom: 50px;
+    justify-content: center;
+    height: 300px;
+    width: 300px;
+    background: url('../menubg.png');
+    background-size: 6px 6px;
+    border: solid 3px #fff;
+    color: #353535;
+    font-size: 30px;
+    text-align: center;
+    font-weight: bold;
+
+    ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        li:hover {
+            animation: rainbow 2s ease-in-out infinite;
+            background-image: linear-gradient(
+                -180deg,
+                orange,
+                yellow,
+                green,
+                cyan,
+                blue,
+                violet
+            );
+            background-size: auto 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    #ui {
+        align-items: center;
+    }
+    #balls-canvas {
+        width: 300px;
+        height: 300px;
+        top: calc(50vh - 150px);
+    }
+
+    #balls-canvas2 {
+        width: 300px;
+        height: 300px;
+        top: calc(50vh - 150px);
+    }
 }
