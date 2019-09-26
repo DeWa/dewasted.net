@@ -19,7 +19,7 @@ export default class GradientLines {
         this.lineSize = 6;
         this.colors = [244, 350, 129, 0, 64];
         this.subLineSize = 2;
-        this.startY = 23;
+        this.startY = 3;
         this.colorSpeed = 100;
         this.colorChangeSpeed = 0.08;
         this.colorChangeDelay = 0.5;
