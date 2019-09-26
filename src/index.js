@@ -6,6 +6,7 @@ import Balls from './effects/balls';
 const plasmaCanvas = document.getElementById('plasma-canvas');
 const sinwaveCanvas = document.getElementById('sinwave-canvas');
 const ballsCanvas = document.getElementById('balls-canvas');
+const ballsCanvas2 = document.getElementById('balls-canvas2');
 
 const PlasmaEffect = new Plasma(plasmaCanvas, window.innerWidth / 6, 300 / 4);
 const SinWaveEffect = new SinWave(
@@ -18,7 +19,7 @@ const GradientLinesEffect = new GradientLines(
     window.innerWidth / 4,
     400 / 4
 );
-const BallsEffect = new Balls(ballsCanvas, 300, 300);
+const BallsEffect = new Balls(ballsCanvas, ballsCanvas2, 150, 150);
 
 function clearCanvas(canvasElement) {
     const ctx = canvasElement.getContext('2d');
