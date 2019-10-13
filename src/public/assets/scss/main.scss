@@ -77,14 +77,19 @@ body {
 
 #menu {
     display: flex;
-    margin-bottom: 50px;
+    margin-bottom: 100px;
     justify-content: center;
     height: 300px;
     width: 300px;
-    background: url('../menubg.png');
-    background-size: 6px 6px;
-    border: solid 3px #fff;
-    color: #353535;
+    // iOS Safari isn't ready for this background, so let's use solid color
+    // background: url('../menubg.png');
+    // background-size: 6px 6px;
+    background-color: #073576;
+    border-top: solid 5px #498be7;
+    border-left: solid 5px #1a71ec;
+    border-bottom: solid 5px #082144;
+    border-right: solid 5px #0a2b59;
+
     font-size: 30px;
     text-align: center;
     font-weight: bold;
@@ -96,6 +101,10 @@ body {
         li {
             margin: 0;
             cursor: pointer;
+            color: #fff;
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+                -1px 1px 0 #000, 1px 1px 0 #000;
+            -webkit-text-stroke: 1px black;
         }
 
         li:hover {
@@ -113,8 +122,14 @@ body {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: none;
+            -webkit-text-stroke: none;
         }
     }
+}
+
+#now-playing {
+    width: 100%;
 }
 
 @media only screen and (max-width: 1400px) {
