@@ -2,6 +2,7 @@ import Plasma from './effects/plasma';
 import SinWave from './effects/sinwavetext';
 import GradientLines from './effects/gradientlines';
 import Balls from './effects/balls';
+import './components/player';
 
 const plasmaCanvas = document.getElementById('plasma-canvas');
 const sinwaveCanvas = document.getElementById('sinwave-canvas');
