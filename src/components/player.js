@@ -7,7 +7,7 @@ const playerText = document.getElementById('playing-text');
 
 const startText = 'PRESS TO PLAY';
 const loadingText = 'LOADING...';
-const playingText = 'Magma & wabe - Blinded Monarch';
+const playingText = 'NOW PLAYING: MAGMA & WABE - BLINDED MONARCH';
 const errorText = 'ERROR WHEN LOADING MUSIC';
 
 const handleMusicClick = () => {
