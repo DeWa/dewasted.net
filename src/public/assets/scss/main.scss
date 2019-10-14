@@ -51,12 +51,12 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
 }
 
 body {
     background-color: black;
     font-family: 'VT323', monospace;
+    overflow: hidden;
 }
 
 #plasma-canvas {
@@ -167,11 +167,12 @@ body {
 }
 
 #now-playing {
-    width: 100%;
+    width: 100vw;
     text-align: center;
     padding: 2rem 0 2rem 0;
     font-size: 3rem;
     font-weight: bold;
+    overflow: hidden;
 
     .press-play {
         cursor: pointer;
