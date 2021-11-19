@@ -95,3 +95,8 @@ typings/
 
 # Build
 /dist
+
+# Parcel related files
+dist/
+.cache/
+.parcel-cache
