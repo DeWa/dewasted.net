@@ -1,48 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
-
-/* Animations */
-@keyframes rainbow {
-    0% {
-        background-position: 0% 0%;
-    }
-
-    50% {
-        background-position: 0% 100%;
-    }
-
-    100% {
-        background-position: 0% 00%;
-    }
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes right-to-left {
-    0% {
-        transform: translateX(calc(50vw + 450px));
-    }
-
-    100% {
-        transform: translateX(calc(-50vw - 450px));
-    }
-}
+@import 'fonts.scss';
+@import 'animations.scss';
 
 * {
     -webkit-font-smoothing: none;
     -moz-osx-font-smoothing: none;
-}
-
-*:link {
-    text-decoration: none;
 }
 
 html,
@@ -55,131 +16,33 @@ body {
 
 body {
     background-color: black;
-    font-family: 'VT323', monospace;
+    font-family: 'amiga_foreverregular', monospace;
     overflow: hidden;
 }
 
-#plasma-canvas {
-    z-index: 3;
+#effects {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
     height: 100%;
-}
-
-#sinwave-canvas {
-    z-index: 3;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 400px;
-}
-
-#balls-canvas {
-    z-index: 3;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 400px;
-    height: 400px;
-    animation: rotate 8s linear infinite;
-    transform-origin: 50% 30%;
-}
-
-#balls-canvas2 {
-    z-index: 3;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 400px;
-    height: 400px;
-    animation: rotate 8s linear infinite;
-    transform-origin: 50% 30%;
-}
-
-#ui {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 4;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 30px;
-}
-
-#menu {
-    display: flex;
-    justify-content: center;
-    min-height: 300px;
-    max-height: 400px;
-    width: 380px;
-    // iOS Safari isn't ready for this background, so let's use solid color
-    // background: url('../menubg.png');
-    // background-size: 6px 6px;
-    background-color: #073576;
-    border-top: solid 5px #498be7;
-    border-left: solid 5px #1a71ec;
-    border-bottom: solid 5px #082144;
-    border-right: solid 5px #0a2b59;
-    font-size: 30px;
-    text-align: center;
-    font-weight: bold;
-    overflow-y: auto;
-
-    ul {
-        list-style: none;
-        padding: 0;
-
-        li {
-            margin: 0;
-            cursor: pointer;
-            color: #fff;
-            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
-                -1px 1px 0 #000, 1px 1px 0 #000;
-            -webkit-text-stroke: 1px black;
-        }
-
-        li:hover {
-            animation: rainbow 2s ease-in-out infinite;
-            background-image: linear-gradient(
-                -180deg,
-                orange,
-                yellow,
-                green,
-                cyan,
-                blue,
-                violet
-            );
-            background-size: auto 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: none;
-            -webkit-text-stroke: none;
-        }
-    }
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
 #now-playing {
     width: 100vw;
     text-align: center;
     padding: 2rem 0 2rem 0;
-    font-size: 3rem;
-    font-weight: bold;
+    font-size: 1rem;
     overflow: hidden;
+    z-index: 1;
+    position: absolute;
+    margin-top: calc(30vh - 30px);
 
     .press-play {
         cursor: pointer;
         color: #fff;
-        text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
-            -1px 1px 0 #000, 1px 1px 0 #000;
-        -webkit-text-stroke: 1px rgb(29, 29, 29);
     }
 
     .press-play:hover {
@@ -203,22 +66,5 @@ body {
         -webkit-text-fill-color: transparent;
         background-clip: text;
         -webkit-text-stroke: 1px rgba(0, 0, 0, 0.555);
-    }
-}
-
-@media only screen and (max-width: 1400px) {
-    #ui {
-        align-items: center;
-    }
-    #balls-canvas {
-        width: 300px;
-        height: 300px;
-        top: calc(50vh - 150px);
-    }
-
-    #balls-canvas2 {
-        width: 300px;
-        height: 300px;
-        top: calc(50vh - 150px);
     }
 }

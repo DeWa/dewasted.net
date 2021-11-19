@@ -1,41 +1,59 @@
 import Plasma from './effects/plasma';
-import SinWave from './effects/sinwavetext';
-import GradientLines from './effects/gradientlines';
-import Balls from './effects/balls';
-import './components/player';
+import Lines from './effects/gradientlines';
+import Stars from './effects/stars';
+import Sinwave from './effects/sinwavetext';
 
-const plasmaCanvas = document.getElementById('plasma-canvas');
-const sinwaveCanvas = document.getElementById('sinwave-canvas');
-const ballsCanvas = document.getElementById('balls-canvas');
-const ballsCanvas2 = document.getElementById('balls-canvas2');
+import { initPlayer } from './components/player';
 
-const PlasmaEffect = new Plasma(plasmaCanvas, window.innerWidth / 6, 300 / 4);
-const SinWaveEffect = new SinWave(
-    sinwaveCanvas,
-    window.innerWidth / 4,
-    400 / 4
+let fpsInterval, startTime, now, then, elapsed;
+
+const effectCanvas = document.getElementById('effects');
+const ctx = effectCanvas.getContext('2d');
+
+// Effects
+const plasmaEffect = new Plasma(ctx, effectCanvas.width, effectCanvas.height);
+const linesEffect = new Lines(
+    effectCanvas,
+    effectCanvas.width,
+    effectCanvas.height
 );
-const GradientLinesEffect = new GradientLines(
-    sinwaveCanvas,
-    window.innerWidth / 4,
-    400 / 4
+const starsEffect = new Stars(ctx, effectCanvas.width, effectCanvas.height);
+const sinwaveText = new Sinwave(
+    effectCanvas,
+    effectCanvas.width,
+    effectCanvas.height
 );
-const BallsEffect = new Balls(ballsCanvas, ballsCanvas2, 150, 150);
 
-function clearCanvas(canvasElement) {
-    const ctx = canvasElement.getContext('2d');
-    ctx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+function clearCanvas() {
+    const ctx = effectCanvas.getContext('2d');
+    ctx.clearRect(0, 0, effectCanvas.width, effectCanvas.height);
 }
 
-function animate(timestamp) {
-    PlasmaEffect.draw(timestamp);
+const start = () => {
+    fpsInterval = 1000 / 30; // 30FPS
+    then = Date.now();
+    startTime = then;
+    animate();
+};
 
-    clearCanvas(sinwaveCanvas);
-    GradientLinesEffect.draw(timestamp);
-    SinWaveEffect.draw(timestamp);
-    BallsEffect.draw(timestamp);
+initPlayer();
 
+// 30 fps
+function animate() {
     window.requestAnimationFrame(animate);
+
+    now = Date.now();
+    elapsed = now - then;
+
+    if (elapsed > fpsInterval) {
+        // Update effects
+        clearCanvas();
+        plasmaEffect.update();
+        starsEffect.update();
+        linesEffect.update();
+        sinwaveText.update();
+        then = now - (elapsed % fpsInterval);
+    }
 }
 
-window.requestAnimationFrame(animate);
+start();

@@ -17,17 +17,18 @@ export default class SinWaveText {
         this.speed = 2;
         this.fps = 10;
         this.originalText = 'DEWASTED.NET';
-        this.amplitude = 20;
+        this.amplitude = this.isSmall ? 8 : 25;
         this.degree = 45;
         this.paused = false;
-        this.textY = 43;
+        this.textY = 83;
         this.shadow = {
             x: 2,
             y: 2,
         };
 
         this.isSmall = window.innerWidth < 1400;
-        this.textSize = this.isSmall ? '15px' : '25px';
+        this.textSize = this.isSmall ? '50px' : '50px';
+        this.spacing = this.isSmall ? 50 : 30;
         this.lastDrawn = 0;
         this.text = this.initText(this.originalText);
     }
@@ -45,25 +46,17 @@ export default class SinWaveText {
                 width,
                 position,
             };
-            position += width + 20;
+            position += width + this.spacing;
             return charObj;
         });
     }
-    getTime() {
-        return this.paused ? this.pausedTime : Date.now() - this.startTime;
-    }
 
-    draw(timestamp) {
-        if (timestamp - this.lastDrawn < this.fps) {
-            return;
-        }
-
-        this.lastDrawn = timestamp;
+    update() {
         // Redraw
         this.text.forEach(char => {
             char.position += this.speed;
-            if (char.position > this.width - char.width) {
-                char.position = -char.width;
+            if (char.position > this.width - char.width + 50) {
+                char.position = -char.width - 50;
             }
             const y = Math.sin(char.position / this.degree) * this.amplitude;
 
@@ -73,12 +66,12 @@ export default class SinWaveText {
                 char.position,
                 y + this.textY + 20
             );
-            grd.addColorStop(0.28, 'rgb(255,242,181)');
-            grd.addColorStop(0.4, 'rgb(77,77,77)');
-            grd.addColorStop(0.54, 'rgb(255,242,181)');
-            this.ctx.font = `${this.textSize} Black Ops One`;
+            grd.addColorStop(0.28, 'rgba(219, 219, 219, 1)');
+            grd.addColorStop(0.4, 'rgba(255, 255, 255, 1)');
+            grd.addColorStop(0.54, 'rgba(93, 93, 93, 1)');
+            this.ctx.font = `${this.textSize} skirmisherregular`;
             // Shadow
-            this.ctx.fillStyle = '#121414';
+            this.ctx.fillStyle = 'rgba(66, 66, 66, 1)';
             this.ctx.fillText(
                 char.char,
                 char.position + this.shadow.x,
@@ -87,6 +80,8 @@ export default class SinWaveText {
             // normal text
             this.ctx.fillStyle = grd;
             this.ctx.fillText(char.char, char.position, y + this.textY);
+            this.ctx.fillStyle = 'black';
+            this.ctx.closePath();
         });
     }
 }

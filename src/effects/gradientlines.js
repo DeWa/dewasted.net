@@ -14,23 +14,20 @@ export default class GradientLines {
         canvasElement.width = width;
         canvasElement.height = height;
 
+        // Public, change these!
         this.speed = 2;
-        this.fps = 10;
-        this.lineSize = 6;
-        this.colors = [244, 350, 129, 0, 64];
-        this.subLineSize = 2;
-        this.startY = 3;
+        this.subLineSize = 3;
+        this.startY = height / 3;
         this.colorSpeed = 100;
         this.colorChangeSpeed = 0.08;
         this.colorChangeDelay = 0.5;
+        this.color = 0;
 
-        this.lastDrawn = 0;
-        this.lines = [];
-        this.colorRound = 0;
-        this.currentColor = 0;
-        this.newColor = this.colors[this.currentColor];
-        this.colorChangeCounter = 0;
-        this.isColorChangeOn = false;
+        // Private, don't change these
+        this._lastDrawn = 0;
+        this._lines = [];
+        this._colorRound = 0;
+        this._colorChangeCounter = 0;
 
         this.initLines();
     }
@@ -39,23 +36,20 @@ export default class GradientLines {
         // Lines are actually 5 small lines per line
         let linePos = this.startY;
         let light = 30;
-        for (let i = 0; i < this.lineSize; i++) {
-            this.lines.push([]);
-            for (let j = 0; j < 5; j++) {
-                this.lines[i].push({
-                    width: this.subLineSize,
-                    y: linePos,
-                    color: this.colors[this.currentColor],
-                    light: light,
-                    lightPos: true,
-                    colorChangeOn: false,
-                });
-                linePos += this.subLineSize;
-                light += 90 / 5;
-            }
-            light = 30;
-            linePos += 1;
+        this.lines = [];
+        for (let j = 0; j < 5; j++) {
+            this.lines.push({
+                width: this.subLineSize,
+                y: linePos,
+                color: this.color,
+                light: light,
+                lightPos: true,
+            });
+            linePos += this.subLineSize;
+            light += 90 / 5;
         }
+        light = 30;
+        linePos += 1;
     }
 
     HSVtoRGB(h, s, v) {
@@ -93,80 +87,39 @@ export default class GradientLines {
         };
     }
 
-    draw(timestamp) {
-        if (timestamp - this.lastDrawn < this.fps) {
-            return;
-        }
-        this.lastDrawn = timestamp;
+    update() {
         // Lines
-        if (this.colorChangeCounter > 0) {
-            this.colorChangeCounter--;
-        }
-        this.lines.map((mainLine, mainIndex) => {
-            mainLine.map((line, index) => {
-                if (line.color !== this.colors[this.currentColor]) {
-                    if (
-                        this.colorChangeCounter <
-                        (mainIndex + +0.1) * 10.3 +
-                            (index + 0.1) * 9 * this.colorChangeDelay
-                    ) {
-                        if (line.color < this.colors[this.currentColor]) {
-                            line.color += this.colorChangeSpeed;
-                        } else {
-                            line.color -= this.colorChangeSpeed;
-                        }
-                    }
-                }
-                // Change colorChange flag
-                if (
-                    mainIndex === 0 &&
-                    index === 0 &&
-                    Math.round(line.color) === this.colors[this.currentColor] &&
-                    this.isColorChangeOn
-                ) {
-                    this.isColorChangeOn = false;
-                }
-                this.ctx.beginPath();
-                this.ctx.moveTo(0, line.y);
-                this.ctx.lineTo(this.canvas.width, line.y);
+        this.lines.map((line, index) => {
+            this.ctx.beginPath();
+            this.ctx.moveTo(0, line.y);
+            this.ctx.lineTo(this.canvas.width, line.y);
 
-                const color = this.HSVtoRGB(
-                    line.color / 360,
-                    90,
-                    line.light / 100
-                );
-                this.ctx.strokeStyle = `rgb(${color.r},${color.g}, ${color.b})`;
-                this.ctx.lineWidth = line.width;
-                this.ctx.stroke();
+            const color = this.HSVtoRGB(line.color / 360, 0, line.light / 100);
+            this.ctx.strokeStyle = `rgb(${color.r},${color.g}, ${color.b})`;
+            this.ctx.lineWidth = line.width;
+            this.ctx.stroke();
 
-                // Animate!
-                if (line.lightPos) {
-                    line.light += 1;
-                    if (line.light > 90) {
-                        line.lightPos = false;
-                    }
-                } else {
-                    line.light -= 1;
-                    if (line.light <= 30) {
-                        line.lightPos = true;
-                    }
+            // Animate!
+            if (line.lightPos) {
+                line.light += 1;
+                if (line.light > 90) {
+                    line.lightPos = false;
                 }
-            });
+            } else {
+                line.light -= 1;
+                if (line.light <= 30) {
+                    line.lightPos = true;
+                }
+            }
         });
+
         this.colorRound++;
-        if (
-            this.colorRound > this.colorSpeed &&
-            this.colorChangeCounter <= 0 &&
-            !this.isColorChangeOn
-        ) {
-            this.isColorChangeOn = true;
+        if (this.colorRound > this.colorSpeed && this.colorChangeCounter <= 0) {
             this.currentColor++;
             this.colorRound = 0;
             if (this.currentColor > this.colors.length - 1) {
                 this.currentColor = 0;
             }
-            this.colorChangeCounter =
-                this.lineSize * this.colorChangeDelay * 50;
         }
     }
 }

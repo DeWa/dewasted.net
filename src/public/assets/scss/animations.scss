@@ -1,0 +1,33 @@
+@keyframes rainbow {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% 00%;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes right-to-left {
+    0% {
+        transform: translateX(calc(50vw + 450px));
+    }
+
+    100% {
+        transform: translateX(calc(-50vw - 450px));
+    }
+}

@@ -5,24 +5,21 @@
  */
 
 export default class PlasmaEffect {
-    constructor(canvasElement, width, height) {
-        this.canvas = canvasElement;
-        this.context = canvasElement.getContext('2d');
+    constructor(context, width, height) {
+        this.context = context;
         this.width = width;
+        this.startY = Math.ceil(height / 3);
         this.height = height;
-        this.canvas.width = width;
-        this.canvas.height = height;
 
         this.lastDrawn = 0;
         this.speed = 1;
-        this.fps = 20;
         this.hueShift = 0;
         this.switch = 0;
         this.size = 0.2;
 
         this.isSmall = window.innerWidth < 1400;
         this.plasma = this.createPlasma();
-        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.fillRect(0, 0, this.width, this.height);
     }
 
     HSVtoRGB(h, s, v) {
@@ -61,14 +58,15 @@ export default class PlasmaEffect {
     }
 
     drawPlasma() {
-        const { width, height, plasma, context } = this;
+        const { width, height, plasma, context, startY } = this;
         const img = this.context.getImageData(
             0,
             0,
             Math.ceil(width),
             Math.ceil(height)
         );
-        for (let y = 0; y < height; y++) {
+
+        for (let y = startY; y < height; y++) {
             for (let x = 0; x < width; x++) {
                 this.switch = this.switch + 0.1;
 
@@ -84,17 +82,17 @@ export default class PlasmaEffect {
     }
 
     createPlasma() {
-        const { width, height } = this;
+        const { width, height, startY } = this;
         var buffer = new Array(Math.ceil(height));
 
-        for (var y = 0; y < height; y++) {
+        for (var y = startY; y < height; y++) {
             buffer[y] = new Array(Math.ceil(width));
 
             for (var x = 0; x < width; x++) {
-                var value = Math.sin(x / 11.0);
+                var value = Math.sin(x / 40.0);
                 value += Math.sin(y / 16.0);
-                value += Math.sin((x + y) / 22.0);
-                value += Math.sin(Math.sqrt(x * x + y * y) / 8.0);
+                value += Math.sin((x + y) / 42.0);
+                value += Math.sin(Math.sqrt(x * x + y * y) / 30.0);
                 value += 4; // shift range from -4 .. 4 to 0 .. 8
                 value /= 8; // bring range down to 0 .. 1
 
@@ -104,11 +102,10 @@ export default class PlasmaEffect {
         return buffer;
     }
 
-    draw(timestamp) {
-        if (timestamp - this.lastDrawn >= this.fps) {
-            this.lastDrawn = timestamp;
-            this.hueShift = (this.hueShift + 0.02) % 1;
-            this.drawPlasma(this.canvas.width, this.canvas.height);
-        }
+    update() {
+        this.hueShift = (this.hueShift + 0.02) % 1;
+        this.plasma = this.createPlasma();
+        this.context.fillRect(0, 0, this.width * 2, this.height * 2);
+        this.drawPlasma(this.width * 2, this.height * 2);
     }
 }

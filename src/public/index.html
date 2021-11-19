@@ -7,31 +7,15 @@
         <meta name="description" content="DeWasted.net" />
     </head>
     <link rel="stylesheet" href="assets/scss/main.scss" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
     <body>
-        <canvas id="plasma-canvas"></canvas>
-        <canvas id="sinwave-canvas"></canvas>
-        <canvas id="balls-canvas"></canvas>
-        <canvas id="balls-canvas2"></canvas>
-        <div id="ui">
-            <div id="now-playing">
-                <div id="playing-text" class="press-play">PRESS TO PLAY</div>
-            </div>
-            <nav id="menu">
-                <ul>
-                    <a href="https://dewasted.net/retro"
-                        ><li tabindex="1">RETRO-DEMOS</li></a
-                    >
-                    <a href="https://dewasted.net/asteroids"
-                        ><li tabindex="2">ASTEROIDS</li></a
-                    >
-                    <li>MORE COMING SOON...</li>
-                </ul>
-            </nav>
+        <div id="now-playing">
+            <div id="playing-text" class="press-play">PRESS TO PLAY</div>
         </div>
+        <canvas id="effects" width="640" height="400"></canvas>
     </body>
-    <script type="text/javascript" src="../index.js"></script>
+    <script type="module" src="../index.js"></script>
 </html>
