@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "@swc/helpers": "^0.3.2",
+        "express": "^4.17.2",
         "howler": "^2.2.3"
     }
 }
