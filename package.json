@@ -9,15 +9,12 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/DeWaster/dewasted.net.git"
+        "url": "git+https://github.com/DeWa/dewasted.net.git"
     },
     "author": "Joonas Reinikka <joonas.reinikka@gmail.com>",
     "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/DeWaster/dewasted.net/issues"
-    },
     "browserslist": "> 0.5%, last 2 versions, not dead",
-    "homepage": "https://github.com/DeWaster/dewasted.net#readme",
+    "homepage": "https://dewasted.net",
     "devDependencies": {
         "@parcel/packager-raw-url": "^2.0.1",
         "@parcel/transformer-sass": "^2.0.1",
