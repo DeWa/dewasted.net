@@ -1,20 +1,20 @@
-FROM node:11-alpine
+FROM node:16-alpine
 
 EXPOSE 5000
 WORKDIR /app
 
-RUN apk add --no-cache nginx git
+RUN apk add --no-cache nginx git python3
 
 ADD nginx.conf /
 
 # Retro-demos
-RUN git clone https://github.com/DeWaster/retro-demos.git
+RUN git clone https://github.com/DeWa/retro-demos.git
 WORKDIR /app/retro-demos
 RUN npm install && npm run build
 
 # Asteroidz
 WORKDIR /app
-RUN git clone https://github.com/DeWaster/asteroidz.git
+RUN git clone https://github.com/DeWa/asteroidz.git
 
 # Dewasted.net
 ADD . /app/dewasted.net
