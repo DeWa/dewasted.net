@@ -1,4 +1,5 @@
 # DeWasted.net
+<img width="1267" alt="Näyttökuva 2021-11-20 kello 0 24 40" src="https://user-images.githubusercontent.com/5947802/142699153-8e6a0694-fb66-4430-8ad7-5ff7ea686192.png">
 
 Landing page for DeWasted.net. Inspired by all the cool Amiga crack intros out there.
 
