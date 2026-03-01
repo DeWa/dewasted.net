@@ -30,7 +30,7 @@ function clearCanvas() {
 }
 
 const start = () => {
-    fpsInterval = 1000 / 30; // 30FPS
+    fpsInterval = 1000 / 50; // 50FPS
     then = Date.now();
     startTime = then;
     animate();
