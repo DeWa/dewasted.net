@@ -1,10 +1,11 @@
 {
     "name": "dewasted.net",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "",
     "scripts": {
-        "dev": "parcel src/public/index.html",
-        "build": "parcel build src/public/index.html",
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -16,17 +17,13 @@
     "browserslist": "> 0.5%, last 2 versions, not dead",
     "homepage": "https://dewasted.net",
     "devDependencies": {
-        "@parcel/packager-raw-url": "^2.0.1",
-        "@parcel/transformer-sass": "^2.0.1",
-        "@parcel/transformer-webmanifest": "^2.0.1",
-        "eslint": "^8.2.0",
-        "parcel": "^2.0.1",
-        "prettier": "^2.4.1",
-        "sass": "^1.43.4"
+        "eslint": "^9.39.2",
+        "prettier": "^3.7.4",
+        "vite": "^6.0.0"
     },
     "dependencies": {
-        "@swc/helpers": "^0.3.2",
-        "express": "^4.17.2",
-        "howler": "^2.2.3"
+        "@swc/helpers": "^0.5.17",
+        "express": "^5.2.1",
+        "howler": "^2.2.4"
     }
 }

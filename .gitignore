@@ -71,7 +71,7 @@ typings/
 .env
 .env.test
 
-# parcel-bundler cache (https://parceljs.org/)
+# Vite
 .cache
 
 # next.js build output
@@ -96,7 +96,5 @@ typings/
 # Build
 /dist
 
-# Parcel related files
+# Build output
 dist/
-.cache/
-.parcel-cache

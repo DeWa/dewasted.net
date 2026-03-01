@@ -1,13 +1,7 @@
 import { Howl } from 'howler';
 
-const blindedMp3Url = new URL(
-    '../public/assets/music/blinded.mp3',
-    import.meta.url
-);
-const blindedOggUrl = new URL(
-    '../public/assets/music/blinded.ogg',
-    import.meta.url
-);
+const blindedMp3Url = '/assets/music/blinded.mp3';
+const blindedOggUrl = '/assets/music/blinded.ogg';
 
 const playerText = document.getElementById('playing-text');
 
@@ -41,7 +35,7 @@ export const initPlayer = () => {
     };
 
     const music = new Howl({
-        src: [blindedMp3Url.href, blindedOggUrl.href],
+        src: [blindedMp3Url, blindedOggUrl],
         loop: true,
         preload: false,
         onplay: () => {
