@@ -44,3 +44,4 @@ jobs:
           REPO: self
           BRANCH: site
           FOLDER: ${{ env.BUILD_PATH }}/dist
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
