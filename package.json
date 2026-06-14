@@ -19,7 +19,7 @@
     "devDependencies": {
         "eslint": "^9.39.2",
         "prettier": "^3.7.4",
-        "vite": "^6.4.2"
+        "vite": "^8.0.16"
     },
     "dependencies": {
         "@swc/helpers": "^0.5.17",
